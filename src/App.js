@@ -18,7 +18,8 @@ export default class App extends Component {
   }
 
   render() {
-    const dataList = this.state.shows.map((show) => <li>{show.title}</li>);
+    const dataList = this.state.shows.map((show) => {
+    return <li key={show._id}>{show.title}</li> });
     return (
       <div>
         {
