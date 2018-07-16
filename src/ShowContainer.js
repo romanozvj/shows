@@ -17,10 +17,8 @@ export class ShowContainer extends Component {
   }
 
   render() {
-    const dataList = this.state.shows.map((show) => {
-    return <ShowComponent key={show._id} id={show._id} title={show.title} />  });
     return (
-        <ul>{dataList}</ul>
+        <ul>{this.state.shows.map((show) => <ShowComponent key={show._id} id={show._id} title={show.title} />)}</ul>
     );
   }
 }

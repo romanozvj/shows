@@ -26,12 +26,10 @@ export class EpisodeContainer extends Component {
 
 
     render() {
-        const dataList = this.state.episodes.map((episode) => {
-        return <EpisodeComponent key={episode._id} id={episode._id} title={episode.title} />  });
         return (
             <div>
                 <p>{this.state.description}</p>
-                <ul>{dataList}</ul>
+                <ul>{this.state.episodes.map((episode) => <EpisodeComponent key={episode._id} title={episode.title} />)}</ul>
                 <Link to="/">Back to main page</Link>
             </div>
         );

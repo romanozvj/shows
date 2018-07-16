@@ -18,13 +18,11 @@ export default class App extends Component {
   }
 
   render() {
-    const dataList = this.state.shows.map((show) => {
-    return <li key={show._id}>{show.title}</li> });
     return (
       <div>
         {
           this.state.shows.length > 0
-            ? <ul>{dataList}</ul>
+            ? <ul>{this.state.shows.map((show) => <li key={show._id}>{show.title}</li>);}</ul>
             : <button onClick={this._onButtonClick} type="button">
                 Load shows
               </button>

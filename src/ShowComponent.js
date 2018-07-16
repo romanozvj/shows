@@ -6,7 +6,7 @@ export class ShowComponent extends Component {
         //console.log(this);
         return (
             <li>
-            <Link to={"/" + this.props.id}>{this.props.title}</Link>
+                <Link to={"/" + this.props.id}>{this.props.title}</Link>
             </li>
         )
     }
