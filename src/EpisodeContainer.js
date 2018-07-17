@@ -15,13 +15,14 @@ export class EpisodeContainer extends Component {
 
     componentDidMount() {
         const url = this.props.match.url;
-        fetch('https://api.infinum.academy/api/shows' + url + '/episodes')
-            .then((data) => data.json())
-            .then((response) => this.setState( { episodes: response.data, } ));
-
-        fetch('https://api.infinum.academy/api/shows' + url)
-            .then((data) => data.json())
-            .then((response) => this.setState( { description: response.data.description, } ));
+        Promise.all([
+            fetch('https://api.infinum.academy/api/shows' + url + '/episodes').then((response) => response.json()),
+            fetch('https://api.infinum.academy/api/shows' + url).then((response) => response.json())
+        ])
+            .then((data) => this.setState({
+                episodes: data[0].data,
+                description: data[1].data.description
+            }));
     }
 
 
@@ -33,6 +34,6 @@ export class EpisodeContainer extends Component {
                 <Link to="/">Back to main page</Link>
             </div>
         );
-        
+
     }
 }
