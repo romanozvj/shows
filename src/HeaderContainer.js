@@ -5,6 +5,7 @@ import showLogo from './showLogo.png';
 const headerClass = css`
     display: block;
     width: 100%;
+    height: 50px;
 `;
 
 export class HeaderContainer extends Component {
