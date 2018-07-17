@@ -15,9 +15,12 @@ export class EpisodeContainer extends Component {
 
     componentDidMount() {
         const url = this.props.match.url;
+        console.log('The location is: ', url);
+        const idFromUrl = url.substr(url.lastIndexOf('/') + 1);
+        console.log('The ID of the show is: ', idFromUrl);
         Promise.all([
-            fetch('https://api.infinum.academy/api/shows' + url + '/episodes').then((response) => response.json()),
-            fetch('https://api.infinum.academy/api/shows' + url).then((response) => response.json())
+            fetch('https://api.infinum.academy/api/shows' + idFromUrl + '/episodes').then((response) => response.json()),
+            fetch('https://api.infinum.academy/api/shows' + idFromUrl).then((response) => response.json())
         ])
             .then((data) => this.setState({
                 episodes: data[0].data,
