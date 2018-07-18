@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { css } from 'emotion';
-
-const customInput = css`
-    border: none;
-    outline: none;
-    border-bottom: 2px solid #ff758c;
-    margin: 5px;
-`;
-
+import { formWrapper, loginButton } from './loginCss.js'
+import { LoginForm } from './LoginForm';
+import { Link } from 'react-router-dom';
 
 export class LoginContainer extends Component {
     constructor(args) {
@@ -30,25 +24,27 @@ export class LoginContainer extends Component {
     }
 
     _login() {
-        const body = JSON.stringify(this.state);
-        const request = new Request('https://api.infinum.academy/api/users/sessions', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: body});
-        fetch(request)
-            .then((data) => localStorage.setItem(this.state.email, data))
+        fetch('https://api.infinum.academy/api/users/sessions', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(this.state)})
+            .then((data) => data.json())
+            .then(async function (data) {
+                const dataObject = await data;
+                console.log(dataObject.data.token);
+                localStorage.setItem('loginToken', dataObject.data.token);
+            })
             .catch((error) => console.log('Request failure: ', error));
     }
 
     render() {
         return(
-            <div>
+            <div className={formWrapper}>
+                <LoginForm email={this.state.email} labelUsername='My username is' labelPassword='and my password is' password={this.state.password} handleUsername={this._handleUsernameChange} handlePassword={this._handlePasswordChange} />
+                <button className={loginButton} onClick={this._login}>LOGIN</button>
                 <div>
-                    <label htmlFor='username'>Username</label>
-                    <input className={customInput} type='text' id='username' value={this.state.email} onChange={this._handleUsernameChange} />
+                    <p>
+                        Still don't have an account?
+                    </p>
+                    <Link to='/register'>Register</Link>
                 </div>
-                <div>
-                    <label htmlFor='password'>Password</label>
-                    <input className={customInput} type='password' id='password' value={this.state.password} onChange={this._handlePasswordChange} />
-                </div>
-                <button onClick={this._login}>Register</button>
             </div>
         )
     }

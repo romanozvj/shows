@@ -1,22 +1,6 @@
 import React, { Component } from 'react';
 import { ShowComponent } from './ShowComponent';
-import { css } from 'emotion';
-
-const showGridWrapper = css`
-  display: grid;
-  margin: auto;
-  width: 70%;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 82px 22px;
-  grid-auto-rows: auto;
-`;
-
-
-const showGridElement = css`
-
-`;
-
-
+import { showGridWrapper, showBodyWrapper, category } from './showGridCss';
 
 export class ShowContainer extends Component {
   constructor(args) {
@@ -35,8 +19,11 @@ export class ShowContainer extends Component {
 
   render() {
     return (
-      <div className={showGridWrapper}>
-        {this.state.shows.map((show) => <ShowComponent className={showGridElement} key={show._id} id={show._id} title={show.title} />)}
+      <div className={showBodyWrapper}>
+        <span className={category}>All shows</span>
+        <div className={showGridWrapper}>
+          {this.state.shows.map((show) => <ShowComponent key={show._id} id={show._id} title={show.title} />)}
+        </div>
       </div>
     );
   }

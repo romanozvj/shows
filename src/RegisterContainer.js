@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { css } from 'emotion';
-
-const customInput = css`
-    border: none;
-    outline: none;
-    border-bottom: 2px solid #ff758c;
-    margin: 5px;
-`;
-
+import { formWrapper, loginButton } from './loginCss'
+import { LoginForm } from './LoginForm';
+import { Link } from 'react-router-dom';
 
 export class RegisterContainer extends Component {
     constructor(args) {
@@ -30,24 +24,23 @@ export class RegisterContainer extends Component {
     }
 
     _register() {
-        const body = JSON.stringify(this.state, null, 2);
-        fetch('https://api.infinum.academy/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: body})
-            .then((data) => console.log('Request success: ', data))
+        fetch('https://api.infinum.academy/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(this.state, null, 2)})
+            .then((data) => data.json())
+            .then((data) => console.log(data))
             .catch((error) => console.log('Request failure: ', error));
     }
 
     render() {
         return(
-            <div>
+            <div className={formWrapper}>
+                <LoginForm email={this.state.email} labelUsername='My username will be' labelPassword='and my password will be' password={this.state.password} handleUsername={this._handleUsernameChange} handlePassword={this._handlePasswordChange} />
+                <button className={loginButton} onClick={this._register}>Register</button>
                 <div>
-                    <label htmlFor='username'>Username</label>
-                    <input className={customInput} type='text' id='username' value={this.state.email} onChange={this._handleUsernameChange} />
+                    <p>
+                        Already have an account?
+                    </p>
+                    <Link to='/login'>Login</Link>
                 </div>
-                <div>
-                    <label htmlFor='password'>Password</label>
-                    <input className={customInput} type='password' id='password' value={this.state.password} onChange={this._handlePasswordChange} />
-                </div>
-                <button onClick={this._register}>Register</button>
             </div>
         )
     }
