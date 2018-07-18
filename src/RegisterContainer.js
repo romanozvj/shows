@@ -31,8 +31,7 @@ export class RegisterContainer extends Component {
 
     _register() {
         const body = JSON.stringify(this.state, null, 2);
-        const request = new Request('https://api.infinum.academy/api/users', {method: 'POST', body: body});
-        fetch(request)
+        fetch('https://api.infinum.academy/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: body})
             .then((data) => console.log('Request success: ', data))
             .catch((error) => console.log('Request failure: ', error));
     }
