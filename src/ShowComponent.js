@@ -1,5 +1,4 @@
 import React, { Component } from 'react'; 
-import { Link } from "react-router-dom";
 import { css } from 'emotion';
 import placeholder from './placeholder.png';
 
@@ -26,7 +25,7 @@ export class ShowComponent extends Component {
         return (
             <div className={itemClass}>
                 <a href={'/show/' + this.props.id}>
-                <img className={imageClass} src={placeholder} />
+                <img alt={this.props.title} className={imageClass} src={placeholder} />
                 </a>
                 <span className={captionClass}>{this.props.title}</span>
             </div>
