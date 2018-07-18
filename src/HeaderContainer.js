@@ -12,7 +12,7 @@ export class HeaderContainer extends Component {
     render() {
         return(
             <div className={headerClass}>
-                <img className={css`float: left; width: auto; height: 40px`} src={showLogo} />
+                <img className={css`float: left; width: auto; height: 30px`} src={showLogo} />
             </div>
         )
     }
