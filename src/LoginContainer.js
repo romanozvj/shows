@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
-import { formWrapper, loginButton } from './loginCss.js'
 import { LoginForm } from './LoginForm';
 import { HaveAccountComponent } from './HaveAccountComponent';
+import { css } from 'emotion';
+
+const formWrapper = css`
+    padding: 10px 130px 10px 130px;
+`;
+
+const loginButton = css`
+background-color: rgb(255, 117, 140);
+border-radius: 7px;
+border: none;
+color: white;
+text-align: center;
+font-family: Arial, sans-serif;
+display: block;
+font-size: 18px;
+width: 250px;
+height: 60px;
+margin-top: 60px;
+`;
+
 export class LoginContainer extends Component {
     constructor(args) {
         super(args);
@@ -23,13 +42,16 @@ export class LoginContainer extends Component {
     }
 
     _login() {
-        fetch('https://api.infinum.academy/api/users/sessions', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(this.state)})
+        fetch('https://api.infinum.academy/api/users/sessions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify(this.state)
+        }
+    )
             .then((data) => data.json())
-            .then(async function (data) {
-                const dataObject = await data;
-                console.log(dataObject.data.token);
-                localStorage.setItem('loginToken', dataObject.data.token);
-            })
+            .then((data) => localStorage.setItem('loginToken', data.data.token))
             .catch((error) => console.log('Request failure: ', error));
     }
 

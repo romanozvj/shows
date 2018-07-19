@@ -30,13 +30,18 @@ const socialIcon = css`
     height: 50px;
     width: auto;
     margin-bottom: 20px;
+    margin-right: 10px;
+`;
+
+const socialIcons = css`
+    float: right;
 `;
 
 export class FooterComponent extends Component {
     render() {
         return(
             <div className={footer}>
-                <div className={css`display: inline-block;`}><img alt="Shows Logo" className={logo} src={showLogo} /></div>
+                <div><img alt="Shows Logo" className={logo} src={showLogo} /></div>
                 <div className={textLinksDiv}>
                     <p className={textLink}>
                         About <br />Us
@@ -49,7 +54,7 @@ export class FooterComponent extends Component {
                     </p>
                 </div>
                 <p className={textLink}>©20118 Shows. All rights reserved. Additional terms and conditions may apply.</p>
-                <div className={css`float: right`}>
+                <div className={socialIcons}>
                     <img className={socialIcon} alt="Facebook Icon" src={facebookIcon} />
                     <img className={socialIcon}  alt="Twitter Icon" src={twitterIcon} />
                     <img className={socialIcon}  alt="LinkedIn Icon" src={linkedinIcon} />

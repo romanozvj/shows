@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
-import { formWrapper, loginButton } from './loginCss'
 import { LoginForm } from './LoginForm';
 import { HaveAccountComponent } from './HaveAccountComponent';
+import { css } from 'emotion';
+
+const formWrapper = css`
+    padding: 10px 130px 10px 130px;
+`;
+
+const loginButton = css`
+    background-color: rgb(255, 117, 140);
+    border-radius: 7px;
+    border: none;
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    display: block;
+    font-size: 18px;
+    width: 250px;
+    height: 60px;
+    margin-top: 60px;
+`;
 
 export class RegisterContainer extends Component {
     constructor(args) {
@@ -24,7 +42,14 @@ export class RegisterContainer extends Component {
     }
 
     _register() {
-        fetch('https://api.infinum.academy/api/users', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(this.state, null, 2)})
+        fetch('https://api.infinum.academy/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        }
+    )
             .then((data) => data.json())
             .then((data) => console.log(data))
             .catch((error) => console.log('Request failure: ', error));
