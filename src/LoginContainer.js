@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { formWrapper, loginButton } from './loginCss.js'
 import { LoginForm } from './LoginForm';
-import { Link } from 'react-router-dom';
-
+import { HaveAccountComponent } from './HaveAccountComponent';
 export class LoginContainer extends Component {
     constructor(args) {
         super(args);
@@ -37,14 +36,13 @@ export class LoginContainer extends Component {
     render() {
         return(
             <div className={formWrapper}>
-                <LoginForm email={this.state.email} labelUsername='My username is' labelPassword='and my password is' password={this.state.password} handleUsername={this._handleUsernameChange} handlePassword={this._handlePasswordChange} />
+
+                <LoginForm email={this.state.email} login={true} password={this.state.password} handleUsername={this._handleUsernameChange} handlePassword={this._handlePasswordChange} />
+
                 <button className={loginButton} onClick={this._login}>LOGIN</button>
-                <div>
-                    <p>
-                        Still don't have an account?
-                    </p>
-                    <Link to='/register'>Register</Link>
-                </div>
+
+                <HaveAccountComponent login={true} />
+                
             </div>
         )
     }

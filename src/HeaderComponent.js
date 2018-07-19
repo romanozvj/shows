@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import showLogo from './showLogo.png';
+import showLogo from './icons/showLogo.png';
 
 const header = css`
-    display: block;
-    padding: 10px 130px 10px 130px;
-    height: 50px;
+    margin: 20px 130px 20px 130px;
 `;
 
 const logo = css`
-    float: left;
-    width: auto;
     height: 30px;
 `;
+
 export class HeaderComponent extends Component {
     render() {
         return(

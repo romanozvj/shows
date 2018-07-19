@@ -7,6 +7,7 @@ export const inputUsername = css`
     border-bottom: 2px solid #ff758c;
     margin-top: 20px;
     margin-bottom: 5px;
+    font-family: Arial, sans-serif;
     font-size: 40px;
     color: rgb(255, 117, 140);
 `;
