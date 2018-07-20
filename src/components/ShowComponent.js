@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { css } from 'emotion';
-import placeholder from './placeholder.png';
+import placeholder from '../placeholder.png';
+import { observer } from 'mobx-react';
 
 const item = css`
   vertical-align: top;
@@ -20,14 +21,16 @@ const image = css`
     width: 100%;
 `;
 
+@observer
 export class ShowComponent extends Component {
     render() {
+        const { show } = this.props;
         return (
             <div className={item}>
-                <a href={'/show/' + this.props.id}>
-                <img alt={this.props.title} className={image} src={placeholder} />
+                <a href={'/show/' + this.props.show._id}>
+                <img alt={show.title} className={image} src={placeholder} />
                 </a>
-                <span className={caption}>{this.props.title}</span>
+                <span className={caption}>{show.title}</span>
             </div>
         )
     }

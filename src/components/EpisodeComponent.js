@@ -8,4 +8,4 @@ export class EpisodeComponent extends Component {
             </li>
         )
     }
-}
+} 

@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import { Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
-import { ShowContainer } from './ShowContainer';
-import { EpisodeContainer } from './EpisodeContainer';
-import { RegisterContainer } from './RegisterContainer';
-import { LoginContainer } from './LoginContainer';
-import { HeaderComponent } from './HeaderComponent';
-import { FooterComponent } from './FooterComponent';
+import { ShowContainer } from './containers/ShowContainer';
+import { EpisodeContainer } from './containers/EpisodeContainer';
+import { HeaderComponent } from './components/HeaderComponent';
+import { FooterComponent } from './components/FooterComponent';
+import { UserContainer } from './containers/UserContainer';
 
 ReactDOM.render((
     <BrowserRouter>
@@ -16,8 +15,8 @@ ReactDOM.render((
             <HeaderComponent />
             <div>
                 <Route exact path = "/" component = {ShowContainer} />
-                <Route exact path = "/register" component = {RegisterContainer} />
-                <Route exact path = "/login" component = {LoginContainer} />
+                <Route exact path = "/register" render={() => <UserContainer login={false} /> } />
+                <Route exact path = "/login" render={() => <UserContainer login={true} /> } />
                 <Route exact path = "/show/:showId" component = {EpisodeContainer} />
             </div>
             <Route exact path = "/" component = {FooterComponent} />

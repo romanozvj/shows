@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import linkedinIcon from './icons/linkedinIcon.png';
-import facebookIcon from './icons/facebookIcon.png';
-import twitterIcon from './icons/twitterIcon.png';
-import showLogo from './icons/showLogo.png';
+import linkedinIcon from '../icons/linkedinIcon.png';
+import facebookIcon from '../icons/facebookIcon.png';
+import twitterIcon from '../icons/twitterIcon.png';
+import showLogo from '../icons/showLogo.png';
+import { observer } from 'mobx-react';
 
 const footer = css`
     margin: 30px 130px 0px 130px;
@@ -37,6 +38,7 @@ const socialIcons = css`
     float: right;
 `;
 
+@observer
 export class FooterComponent extends Component {
     render() {
         return(

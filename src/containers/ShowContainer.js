@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { ShowComponent } from './ShowComponent';
+import { ShowComponent } from '../components/ShowComponent';
 import { css } from 'emotion';
+import state from '../state';
+import { getAll as getAllShows } from '../services/show';
+import { observer } from 'mobx-react';
 
 export const showGridWrapper = css`
   display: grid;
@@ -26,29 +29,23 @@ export const category = css`
   color: rgb(45, 45, 45);
 `;
 
+@observer
 export class ShowContainer extends Component {
-  constructor(args) {
-    super(args);
-
-    this.state = {
-      shows: [],
-    };
-  }
 
   componentDidMount() {
-    fetch('https://api.infinum.academy/api/shows')
-      .then((data) => data.json())
-      .then((response) => this.setState({ shows: response.data }));
+    getAllShows(state);
   }
 
   render() {
+
     return (
       <div className={showBodyWrapper}>
         <span className={category}>All shows</span>
         <div className={showGridWrapper}>
-          {this.state.shows.map((show) => <ShowComponent key={show._id} id={show._id} title={show.title} />)}
+          {state.shows.map((show) => <ShowComponent show={show} key={show._id} />)}
         </div>
       </div>
+
     );
   }
 }
