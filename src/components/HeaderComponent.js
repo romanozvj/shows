@@ -4,7 +4,8 @@ import showLogo from '../icons/showLogo.png';
 import { observer } from 'mobx-react';
 
 const header = css`
-    margin: 20px 130px 20px 130px;
+    padding: 20px 130px 20px 130px;
+    border-bottom: 2px solid rgb(248, 248, 248);
 `;
 
 const logo = css`

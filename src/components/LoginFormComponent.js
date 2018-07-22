@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { css } from 'emotion';
 import passwordEyeRed from '../icons/passwordEyeRed.png';
 import { observer } from 'mobx-react';
+import { TextArialComponent } from './TextArialComponent';
 
 const inputUsername = css`
     border: none;
@@ -38,6 +39,18 @@ const passwordEye = css`
     margin-left: -30px;
     height: 25px;
     width: auto;
+`;
+
+const checkbox = css({
+    marginTop: '30px',
+    marginRight: '15px',
+});
+
+const checkboxLabel = css`
+    font-size: 18px;
+    vertical-align: bottom;
+    font-family: Arial, sans-serif;
+    color: rgb(80, 80, 80);
 `;
 
 @observer
@@ -78,6 +91,8 @@ export class LoginFormComponent extends Component {
                         id='password' value={this.props.password} onChange={this.props.handlePassword} />
                     <img className={passwordEye} alt='Eye' src={passwordEyeRed} onClick={this.props.onImageClick} />
                 </div>
+                <input id="rememberMeCheckbox" type="checkbox" onChange={this.props.onCheckboxClick} checked={this.props.isBoxChecked} className={checkbox} />
+                <label className={checkboxLabel} htmlFor="rememberMeCheckbox">Remember me</label>
             </form>
         )
     }

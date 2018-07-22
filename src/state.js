@@ -4,12 +4,23 @@ class State {
 
   @observable
   shows = [];
+
+  @observable
+  showTitle = "";
+
+  @observable
+  showDescription = "";
+
+  @observable
+  showLikesCount = 0;
+
+  @observable
   episodes = [];
 
   @observable
   loadingStates = {
       shows: false,
-      episodes: false
+      showData: false
   };
 }
 

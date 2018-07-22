@@ -7,7 +7,8 @@ import showLogo from '../icons/showLogo.png';
 import { observer } from 'mobx-react';
 
 const footer = css`
-    margin: 30px 130px 0px 130px;
+    padding: 30px 130px 0px 130px;
+    border-top: 2px solid rgb(248, 248, 248);
 `;
 
 const logo = css`

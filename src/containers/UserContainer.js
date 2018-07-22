@@ -14,6 +14,7 @@ export class UserContainer extends Component {
         this._login = this._login.bind(this);
         this._register = this._register.bind(this);
         this._handleImageClick = this._handleImageClick.bind(this);
+        this._handleCheckboxClick = this._handleCheckboxClick.bind(this);
     }
 
     @observable
@@ -55,6 +56,10 @@ export class UserContainer extends Component {
         this.componentState.isHidden = !this.componentState.isHidden;
     }
 
+    _handleCheckboxClick() {
+        this.componentState.rememberMe = !this.componentState.rememberMe;
+    }
+
     render() {
         return (
             <UserComponent
@@ -66,7 +71,9 @@ export class UserContainer extends Component {
                 handleImageClick={this._handleImageClick}
                 isHidden={this.componentState.isHidden}
                 onLoginButton={this._login}
-                onRegisterButton={this._register} />
+                onRegisterButton={this._register}
+                isBoxChecked={this.componentState.rememberMe}
+                onCheckboxClick={this._handleCheckboxClick} />
         )
     }
 }
