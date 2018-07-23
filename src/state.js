@@ -6,6 +6,9 @@ class State {
   shows = [];
 
   @observable
+  favouriteShows = [];
+
+  @observable
   showTitle = "";
 
   @observable

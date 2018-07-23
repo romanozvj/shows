@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { css } from 'emotion';
 import passwordEyeRed from '../icons/passwordEyeRed.png';
 import { observer } from 'mobx-react';
-import { TextArialComponent } from './TextArialComponent';
 
 const inputUsername = css`
     border: none;
