@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
-import { getData } from '../services/show';
+import { getShowData } from '../services/show';
 import { ShowComponent } from '../components/ShowComponent';
-import { observer } from 'mobx-react';
-import state from '../state';
+import { observer, inject } from 'mobx-react';
+import { action } from 'mobx';
 
+@inject('state')
 @observer
 export class ShowContainer extends Component {
-    constructor(args) {
-        super(args);
-        this._onClickFavourite=this._onClickFavourite.bind(this);
-    }
-    componentDidMount() {
-        getData(this.props.match.params.showId);
+    
+    @action
+    componentWillMount() {
+        getShowData(this.props.state, this.props.match.params.showId);
+        this.props.state.currentEpisode.showIndex = -1;
+        this.props.state.currentEpisode.episodeIndex = -1;
     }
 
+    @action.bound
     _onClickFavourite() {
-        const id = this.props.match.params.showId;
-        console.log(id);
-        const show = state.shows.find((show) => show.id = id);
-        console.log(show);
+        const idOfCurrentShow = this.props.match.params.showId;
+        const currentShow = this.props.state.shows.find((show) => show._id === idOfCurrentShow);
+        this.props.state.favouriteShows.push(currentShow);
     }
 
     render() {
+        const id = this.props.match.params.showId;
         return (
-            <ShowComponent onClickFavourite={this._onClickFavourite} />
+            <ShowComponent
+                show={this.props.state.shows.find((show) => show._id === id)}
+                onClickFavourite={this._onClickFavourite} />
         )
     }
 }

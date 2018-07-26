@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import plus from '../icons/plus.png';
-import heart from '../icons/heart.png';
-import placeholder from '../placeholder.png';
+import plus from '../images/plus.png';
+import heart from '../images/heart.png';
+import placeholder from '../images/placeholder.png';
 import { observer } from 'mobx-react';
 
 const icon = css`
@@ -28,7 +28,7 @@ const sideButton = css`
     margin-top: 15px;
 `;
 
-const placeholderClass = css`
+const imageClass = css`
     display: block;
     width: 300px;
     height: 400px;
@@ -58,18 +58,22 @@ const links = css`
 @observer
 export class ShowSideInfoComponent extends Component {
     render() {
+        const image =
+            this.props.imageUrl ?
+                `https://api.infinum.academy/${this.props.imageUrl}` :
+                placeholder;
         return (
             <div className={side}>
                 <div className={sideButton}>
-                    <img className={icon} src={plus}></img>
+                    <img alt="" className={icon} src={plus}></img>
                     Add episode
-                        </div>
+                </div>
 
                 <button onClick={this.props.onClick} className={sideButton}>
-                    <img className={icon} src={heart}></img>
+                    <img alt="" className={icon} src={heart}></img>
                     Favorite
                 </button>
-                <img src={placeholder} alt="" className={placeholderClass} />
+                <img src={image} alt="" className={imageClass} />
 
                 <div className={links}>
                     <p>Official website</p>

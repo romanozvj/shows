@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
-import { observable } from 'mobx';
-import { observer } from 'mobx-react';
+import { observable, action } from 'mobx';
+import { observer, inject } from 'mobx-react';
 import { login, register } from '../services/user';
 import { UserComponent } from '../components/UserComponent';
 
+@inject('state')
 @observer
 export class UserContainer extends Component {
-
-    constructor(args) {
-        super(args);
-        this._handleUsernameChange = this._handleUsernameChange.bind(this);
-        this._handlePasswordChange = this._handlePasswordChange.bind(this);
-        this._login = this._login.bind(this);
-        this._register = this._register.bind(this);
-        this._handleImageClick = this._handleImageClick.bind(this);
-        this._handleCheckboxClick = this._handleCheckboxClick.bind(this);
-    }
 
     @observable
     componentState = {
@@ -25,14 +16,17 @@ export class UserContainer extends Component {
         isHidden: true
     }
 
+    @action.bound
     _handleUsernameChange(event) {
         this.componentState.email = event.target.value;
     }
 
+    @action.bound
     _handlePasswordChange(event) {
         this.componentState.password = event.target.value;
     }
 
+    @action.bound
     _login() {
 
         login({
@@ -45,6 +39,7 @@ export class UserContainer extends Component {
 
     }
 
+    @action.bound
     _register() {
         register({
             email: this.componentState.email,
@@ -52,10 +47,12 @@ export class UserContainer extends Component {
         });
     }
 
+    @action.bound
     _handleImageClick() {
         this.componentState.isHidden = !this.componentState.isHidden;
     }
 
+    @action.bound
     _handleCheckboxClick() {
         this.componentState.rememberMe = !this.componentState.rememberMe;
     }

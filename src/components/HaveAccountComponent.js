@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import { TextArialComponent } from './TextArialComponent';
 import { Link } from 'react-router-dom';
+import { arial20 } from '../styles/font';
 
 const link = css`
     text-decoration: none;
@@ -11,31 +11,29 @@ const link = css`
 const haveAccountDiv = css`
     display: flex;
     flex-direction: row;
-    margin-top: 150px
+    margin-top: 150px;
 `;
+
+
 export class HaveAccountComponent extends Component {
     render() {
         const login = this.props.login;
         return (
             <div className={haveAccountDiv}>
-                <TextArialComponent>{
-                    login ?
-                        "Still don't have an account? " :
-                        "Already have an account? "
-                }
-                    <Link className={link} to={
+                <p className={arial20}>
+                    {
                         login ?
-                            '/register' :
-                            '/login'
-                    }>
-                        <span>{
+                            'Still don\'t have an account? ' :
+                            'Already have an account? '
+                    }
+                    <Link className={link} to={login ? '/register' : '/login'}>
+                        {
                             login ?
                                 'Register' :
                                 'Login'
                         }
-                        </span>
                     </Link>
-                </TextArialComponent>
+                </p>
             </div>
         )
     }

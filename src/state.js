@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 
 class State {
 
@@ -8,23 +8,19 @@ class State {
   @observable
   favouriteShows = [];
 
-  @observable
-  showTitle = "";
+  @computed
+  get currentUserToken () {
+    return 'loginToken' in localStorage ?
+      localStorage.loginToken :
+      sessionStorage.loginToken;
+  }
+
 
   @observable
-  showDescription = "";
-
-  @observable
-  showLikesCount = 0;
-
-  @observable
-  episodes = [];
-
-  @observable
-  loadingStates = {
-      shows: false,
-      showData: false
-  };
+  currentEpisode = {
+    showIndex: -1,
+    episodeIndex: -1
+  }
 }
 
 export default new State();

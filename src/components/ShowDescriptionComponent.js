@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import state from '../state';
-import { TextArialComponent } from './TextArialComponent';
 import { observer } from 'mobx-react';
+import { arial20 } from '../styles/font';
 
 const desc = css`
     grid-area: desc;
@@ -18,12 +17,13 @@ const showTitle = css`
 `;
 
 const sideButton = css`
-    display: inline-flex;
+    display: inline-block;
     flex-direction: row;
     color: rgb(80, 80, 80);
     font-family: Arial, sans-serif;
     vertical-align: middle;
-    line-height: 25px;  
+    line-height: 25px;
+    width: 25px;
     text-decoration: none;
     font-size: 17px;
     border: 3px solid rgb(245, 245, 245);
@@ -33,18 +33,26 @@ const sideButton = css`
     margin-top: 15px;
 `;
 
+const likes = css`
+    display: inline-block;
+    margin-right: 13px;
+`;
+
 @observer
 export class ShowDescriptionComponent extends Component {
     render() {
         return (
-            <div className={desc}>
-                <div>
-                    <p className={showTitle}>{state.showTitle}</p>
-                    <div className={sideButton}>👍 {state.showLikesCount}</div>
-                    <div className={sideButton}>👎 12</div>
-                </div>
-                <TextArialComponent>{state.showDescription}</TextArialComponent>
-            </div>
+            'data' in this.props.show ?
+                <div className={desc}>
+                    <div>
+                        <p className={showTitle}>{this.props.show.data[0].title}</p>
+                        <div className={sideButton}>👍</div>
+                        <p className={likes}>{this.props.show.data[0].likesCount}</p>
+                        <div className={sideButton}>👎</div>
+                    </div>
+                    <p className={arial20}>{this.props.show.data[0].description}</p>
+                </div> :
+                <p>Loading...</p>
         )
     }
 }

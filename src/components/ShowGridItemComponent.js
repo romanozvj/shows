@@ -1,22 +1,23 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import { css } from 'emotion';
-import placeholder from '../placeholder.png';
+import placeholder from '../images/placeholder.png';
 import { observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 
 const item = css`
-  vertical-align: top;
-  display: inline-block;
-  text-align: center;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
 `;
 
 const caption = css`
-  display: block;
-  font-family: Arial, sans-serif;
-  font-size: 30px;
-  color: rgb(83, 83, 83);
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    color: rgb(83, 83, 83);
 `;
 
-const image = css`
+const imageCss = css`
     width: 100%;
     width: 100%;
 `;
@@ -25,12 +26,19 @@ const image = css`
 export class ShowGridItemComponent extends Component {
     render() {
         const { show } = this.props;
+        const image =
+            show.imageUrl ?
+                `https://api.infinum.academy/${show.imageUrl}` :
+                placeholder;
         return (
             <div className={item}>
-                <a href={'/show/' + this.props.show._id}>
-                <img alt={show.title} className={image} src={placeholder} />
-                </a>
-                <span className={caption}>{show.title}</span>
+                <Link to={`/show/${show._id}`}>
+                    <img
+                        alt={show.title}
+                        className={imageCss}
+                        src={image} />
+                </Link>
+                <p className={caption}>{show.title}</p>
             </div>
         )
     }

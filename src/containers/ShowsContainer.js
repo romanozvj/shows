@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { ShowGridItemComponent } from '../components/ShowGridItemComponent';
 import { css } from 'emotion';
-import state from '../state';
-import { getAll as getAllShows } from '../services/show';
-import { observer } from 'mobx-react';
-
+import { getAllShows } from '../services/show';
+import { observer, inject } from 'mobx-react';
 const showGridWrapperFav = css`
   display: grid;
   margin: auto;
@@ -33,31 +31,39 @@ const showBodyWrapper = css`
 
 
 const category = css`
-  display: block;
   padding-top: 50px;
   font-family: Arial, sans-serif;
   font-size: 40px;
   color: rgb(45, 45, 45);
 `;
 
+@inject('state')
 @observer
 export class ShowsContainer extends Component {
 
   componentDidMount() {
-    getAllShows();
+    getAllShows(this.props.state);
   }
 
   render() {
-
     return (
       <div className={showBodyWrapper}>
-        <span className={category}>My favourite shows</span>
+        <div className={category}>My favourite shows</div>
         <div className={showGridWrapperFav}>
-          {state.favouriteShows.map((show) => <ShowGridItemComponent show={show} key={show._id} />)}
+          {
+            this.props.state.favouriteShows.map((show) =>
+              <ShowGridItemComponent
+                show={show}
+                key={show._id} />)
+          }
         </div>
-        <span className={category}>All shows</span>
+        <div className={category}>All shows</div>
         <div className={showGridWrapperAll}>
-          {state.shows.map((show) => <ShowGridItemComponent show={show} key={show._id} />)}
+          {this.props.state.shows.map((show) =>
+            <ShowGridItemComponent
+              show={show}
+              key={show._id} />)
+          }
         </div>
       </div>
 

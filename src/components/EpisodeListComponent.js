@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import state from '../state';
-import { EpisodeComponent } from './EpisodeComponent';
+import { EpisodeGridItemComponent } from './EpisodeGridItemComponent';
 import { observer } from 'mobx-react';
 
 const eps = css`
@@ -23,15 +22,19 @@ const category = css`
 export class EpisodeListComponent extends Component {
     render() {
         return (
-            <div className={eps}><div className={category}>SEASONS & EPISODES</div>
-                {state.episodes.map((episode) =>
-                    <EpisodeComponent
-                        title={episode.title}
-                        key={episode._id}
-                        id={episode._id}
-                        description={episode.description} />)
-                }
-            </div>
+            'data' in this.props.show ?
+                <div className={eps}>
+                    <p className={category}>SEASONS & EPISODES</p>
+                    {this.props.show.data[1].map((episode) =>
+                        <EpisodeGridItemComponent
+                            title={episode.title}
+                            key={episode._id}
+                            id={episode._id}
+                            description={episode.description}
+                            imageUrl={episode.imageUrl} />
+                    )}
+                </div> :
+                <p>Loading...</p>
         )
     }
 }

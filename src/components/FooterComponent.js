@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import linkedinIcon from '../icons/linkedinIcon.png';
-import facebookIcon from '../icons/facebookIcon.png';
-import twitterIcon from '../icons/twitterIcon.png';
-import showLogo from '../icons/showLogo.png';
+import linkedinIcon from '../images/linkedinIcon.png';
+import facebookIcon from '../images/facebookIcon.png';
+import twitterIcon from '../images/twitterIcon.png';
+import showLogo from '../images/showLogo.png';
 import { observer } from 'mobx-react';
 
 const footer = css`
@@ -42,9 +42,9 @@ const socialIcons = css`
 @observer
 export class FooterComponent extends Component {
     render() {
-        return(
+        return (
             <div className={footer}>
-                <div><img alt="Shows Logo" className={logo} src={showLogo} /></div>
+                <img alt="Shows Logo" className={logo} src={showLogo} />
                 <div className={textLinksDiv}>
                     <p className={textLink}>
                         About <br />Us
@@ -56,11 +56,22 @@ export class FooterComponent extends Component {
                         Terms of <br />Service
                     </p>
                 </div>
-                <p className={textLink}>©20118 Shows. All rights reserved. Additional terms and conditions may apply.</p>
+                <p className={textLink}>
+                    ©20118 Shows. All rights reserved. Additional terms and conditions may apply.
+                </p>
                 <div className={socialIcons}>
-                    <img className={socialIcon} alt="Facebook Icon" src={facebookIcon} />
-                    <img className={socialIcon}  alt="Twitter Icon" src={twitterIcon} />
-                    <img className={socialIcon}  alt="LinkedIn Icon" src={linkedinIcon} />
+                    <img
+                        className={socialIcon}
+                        alt="Facebook Icon"
+                        src={facebookIcon} />
+                    <img
+                        className={socialIcon}
+                        alt="Twitter Icon"
+                        src={twitterIcon} />
+                    <img
+                        className={socialIcon}
+                        alt="LinkedIn Icon"
+                        src={linkedinIcon} />
                 </div>
             </div>
         )

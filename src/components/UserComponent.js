@@ -41,11 +41,13 @@ export class UserComponent extends Component {
 
                 <button
                     className={loginButton}
-                    onClick={
+                    onClick=
+                    {
                         this.props.login ?
                             this.props.onLoginButton :
                             this.props.onRegisterButton
-                    }>
+                    }
+                >
                     {
                         this.props.login ?
                             'LOGIN' :

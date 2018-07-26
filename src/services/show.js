@@ -1,25 +1,37 @@
-import { get } from './api';
-import state from '../state';
-import { toJS } from '../../node_modules/mobx';
+import { get, postAuth } from './api';
+import { runInAction } from 'mobx';
 
 
-export async function getAll() {
-  state.loadingStates.shows = true;
+export async function getAllShows(state) {
   const shows = await get('shows');
-  state.shows.replace(shows);
-  state.loadingStates.shows = false;
+  runInAction(() => {
+    state.shows.replace(shows);
+  });
 }
 
-export async function getData(id) {
-  state.loadingStates.showData = true;
+export async function getShowData(state, id) {
   const data = await Promise.all([
     get(`shows/${id}`),
     get(`shows/${id}/episodes`)
   ]);
-  state.showTitle = data[0].title;
-  state.showDescription = data[0].description;
-  state.showLikesCount = data[0].likesCount;
-  state.episodes = data[1];
-  state.loadingStates.showData = false;
-  console.log(toJS(state));
+  const showIndex = state.shows.findIndex((show) => show._id === id);
+  runInAction(() => {
+    state.shows[showIndex].data = data;
+  });
+}
+
+export async function getEpisodeComments(state, episodeId) {
+  const showId = await get(`episodes/${episodeId}`).then((res) => res.showId);
+  const comments = await get(`episodes/${episodeId}/comments`);
+  const showIndex = state.shows.findIndex((show) => show._id === showId);
+  const episodeIndex = state.shows[showIndex].data[1].findIndex((episode) => episode._id === episodeId);
+  runInAction(() => {
+    state.currentEpisode.showIndex = showIndex;
+    state.currentEpisode.episodeIndex = episodeIndex;
+    state.shows[showIndex].data[1][episodeIndex].comments = comments;
+  });
+}
+
+export function postComment(comment, loginToken) {
+  postAuth('comments', comment, loginToken);
 }

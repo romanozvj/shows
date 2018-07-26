@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { css } from 'emotion';
-import showLogo from '../icons/showLogo.png';
+import showLogo from '../images/showLogo.png';
 import { observer } from 'mobx-react';
 
 const header = css`
@@ -15,9 +15,12 @@ const logo = css`
 @observer
 export class HeaderComponent extends Component {
     render() {
-        return(
+        return (
             <div className={header}>
-                <img alt="Shows Logo" className={logo} src={showLogo} />
+                <img
+                    alt="Shows Logo"
+                    className={logo}
+                    src={showLogo} />
             </div>
         )
     }

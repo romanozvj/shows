@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { css } from 'emotion';
-import { Link } from 'react-router-dom';
-import arrow from '../icons/arrow.png';
 import { ShowDescriptionComponent } from './ShowDescriptionComponent';
 import { ShowSideInfoComponent } from './ShowSideInfoComponent';
 import { EpisodeListComponent } from './EpisodeListComponent';
+import { ArrowComponent } from './ArrowComponent';
 
 const gridWrapper = css`
     display: grid;
@@ -26,39 +25,18 @@ const wrapper = css`
     margin: 0px 130px 130px 130px;
 `;
 
-const sideButton = css`
-    display: inline-flex;
-    flex-direction: row;
-    color: rgb(80, 80, 80);
-    font-family: Arial, sans-serif;
-    vertical-align: middle;
-    line-height: 25px;  
-    text-decoration: none;
-    font-size: 17px;
-    border: 3px solid rgb(245, 245, 245);
-    border-radius: 40px;
-    padding: 10px;
-    margin-right: 20px;
-    margin-top: 15px;
-`;
-
-const arrowClass = css`
-    height: 20px;
-    width: 20px;
-    display: inline;
-`;
-
 @observer
 export class ShowComponent extends Component {
     render() {
         return (
             <div className={wrapper}>
-                <Link to="/" className={sideButton}><img src={arrow} className={arrowClass} /></Link>
+                <ArrowComponent to="/" />
                 <div className={gridWrapper}>
-                    <ShowDescriptionComponent />
+                    <ShowDescriptionComponent show={this.props.show} />
                     <ShowSideInfoComponent
-                        onClick={this.props.onClickFavourite} />
-                    <EpisodeListComponent />
+                        onClick={this.props.onClickFavourite}
+                        imageUrl={this.props.show.imageUrl} />
+                    <EpisodeListComponent show={this.props.show} />
                 </div>
             </div>
         )
