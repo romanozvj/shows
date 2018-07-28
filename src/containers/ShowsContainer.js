@@ -3,6 +3,7 @@ import { ShowGridItemComponent } from '../components/ShowGridItemComponent';
 import { css } from 'emotion';
 import { getAllShows } from '../services/show';
 import { observer, inject } from 'mobx-react';
+import { runInAction } from '../../node_modules/mobx';
 const showGridWrapperFav = css`
   display: grid;
   margin: auto;
@@ -40,6 +41,18 @@ const category = css`
 @inject('state')
 @observer
 export class ShowsContainer extends Component {
+
+  componentWillMount() {
+    if (this.props.state.currentUser.name) return;
+    else {
+      localStorage.rememberedLoginToken ?
+        runInAction(() => {
+          this.props.state.currentUser.name = localStorage.rememberedName;
+          this.props.state.currentUser.loginToken = localStorage.rememberedLoginToken;
+        }) :
+        this.props.history.push('/login');
+    }
+  }
 
   componentDidMount() {
     getAllShows(this.props.state);

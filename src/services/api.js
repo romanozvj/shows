@@ -26,5 +26,6 @@ export function postAuth(model, data, token) {
         body: JSON.stringify(data)
     })
         .then((res) => res.json())
-        .then((res) => res.data);
+        .then((res) => res.data)
+        .catch((res) => console.log(res));
 }

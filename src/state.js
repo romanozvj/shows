@@ -8,18 +8,24 @@ class State {
   @observable
   favouriteShows = [];
 
+  @observable
+  currentUser = {
+    name: '',
+    loginToken: '',
+  };
+
   @computed
   get currentUserToken () {
     return 'loginToken' in localStorage ?
       localStorage.loginToken :
-      sessionStorage.loginToken;
+      this.currentUser.loginToken;
   }
 
 
   @observable
   currentEpisode = {
     showIndex: -1,
-    episodeIndex: -1
+    episodeIndex: -1,
   }
 }
 
