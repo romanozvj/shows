@@ -11,6 +11,7 @@ import { EpisodeContainer } from './containers/EpisodeContainer';
 import state from './state';
 import { configure } from 'mobx';
 import { HeaderContainer } from './containers/HeaderContainer';
+import { AddEpisodeModalContainer } from './containers/AddEpisodeModalContainer';
 
 
 configure({ enforceActions: true });
@@ -20,13 +21,14 @@ ReactDOM.render((
         <BrowserRouter>
             <div>
                 <Route path="/" render={(props) => <HeaderContainer {...props} /> } />
+                <Route exact path="/show/:showId/addEpisode" component={AddEpisodeModalContainer} />
                 <Route exact path="/" component={ShowsContainer} />
                 <Route exact path="/register" render={(props) => <UserContainer {...props} login={false} /> } />
                 <Route exact path="/login" render={(props) => <UserContainer {...props} login={true} /> } />
                 <Route exact path="/episode/:episodeId" component={EpisodeContainer} />
-                <Route exact path="/show/:showId" component={ShowContainer} />
+                <Route path="/show/:showId" component={ShowContainer} />
                 <Route exact path="/" component={FooterComponent} />
-                <Route exact path="/show/:showId" component={FooterComponent} />
+                <Route path="/show/:showId" component={FooterComponent} />
             </div>
         </BrowserRouter>
     </Provider>

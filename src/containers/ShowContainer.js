@@ -8,6 +8,11 @@ import { action } from 'mobx';
 @observer
 export class ShowContainer extends Component {
     
+    @action.bound
+    _addEpisode() {
+        this.props.history.push(`/show/${this.props.match.params.showId}/addEpisode`);
+    }
+
     @action
     componentWillMount() {
         getShowData(this.props.state, this.props.match.params.showId);
@@ -16,7 +21,7 @@ export class ShowContainer extends Component {
     }
 
     @action.bound
-    _onClickFavourite() {
+    _favourite() {
         const idOfCurrentShow = this.props.match.params.showId;
         const currentShow = this.props.state.shows.find((show) => show._id === idOfCurrentShow);
         this.props.state.favouriteShows.push(currentShow);
@@ -27,7 +32,8 @@ export class ShowContainer extends Component {
         return (
             <ShowComponent
                 show={this.props.state.shows.find((show) => show._id === id)}
-                onClickFavourite={this._onClickFavourite} />
+                onClickFavourite={this._favourite}
+                onClickAddEpisode={this._addEpisode} />
         )
     }
 }

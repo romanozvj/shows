@@ -80,6 +80,6 @@ export class ShowsContainer extends Component {
         </div>
       </div>
 
-    );
+    )
   }
 }

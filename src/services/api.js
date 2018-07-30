@@ -16,14 +16,27 @@ export function post(model, data) {
         .then((res) => res.data);
 }
 
-export function postAuth(model, data, token) {
-    fetch(`https://api.infinum.academy/api/${model}`, {
+export function postAuthJson(model, data, token) {
+    return fetch(`https://api.infinum.academy/api/${model}`, {
         method: 'POST',
         headers: {
             'Authorization': token,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
+    })
+        .then((res) => res.json())
+        .then((res) => res.data)
+        .catch((res) => console.log(res));
+}
+
+export function postAuth(model, data, token) {
+    return fetch(`https://api.infinum.academy/api/${model}`, {
+        method: 'POST',
+        headers: {
+            'Authorization': token,
+        },
+        body: data
     })
         .then((res) => res.json())
         .then((res) => res.data)

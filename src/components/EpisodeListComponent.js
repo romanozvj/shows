@@ -27,11 +27,10 @@ export class EpisodeListComponent extends Component {
                     <p className={category}>SEASONS & EPISODES</p>
                     {this.props.show.data[1].map((episode) =>
                         <EpisodeGridItemComponent
-                            title={episode.title}
+                            episode={episode}
                             key={episode._id}
-                            id={episode._id}
-                            description={episode.description}
-                            imageUrl={episode.imageUrl} />
+                            imageUrl={episode.imageUrl}
+                        />
                     )}
                 </div> :
                 <p>Loading...</p>

@@ -34,7 +34,8 @@ export class ShowComponent extends Component {
                 <div className={gridWrapper}>
                     <ShowDescriptionComponent show={this.props.show} />
                     <ShowSideInfoComponent
-                        onClick={this.props.onClickFavourite}
+                        onClickFavourite={this.props.onClickFavourite}
+                        onClickAddEpisode={this.props.onClickAddEpisode}
                         imageUrl={this.props.show.imageUrl} />
                     <EpisodeListComponent show={this.props.show} />
                 </div>

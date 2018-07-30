@@ -1,4 +1,4 @@
-import { get, postAuth } from './api';
+import { get, postAuthJson } from './api';
 import { runInAction } from 'mobx';
 
 
@@ -33,5 +33,9 @@ export async function getEpisodeComments(state, episodeId) {
 }
 
 export function postComment(comment, loginToken) {
-  postAuth('comments', comment, loginToken);
+  postAuthJson('comments', comment, loginToken);
+}
+
+export function postEpisode(episode, loginToken) {
+  return postAuthJson('episodes', episode, loginToken);
 }

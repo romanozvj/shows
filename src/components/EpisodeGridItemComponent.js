@@ -49,17 +49,17 @@ export class EpisodeGridItemComponent extends Component {
     render() {
         const image =
             this.props.imageUrl ?
-                `https://api.infinum.academy/${this.props.imageUrl}` :
+                `https://api.infinum.academy/${this.props.episode.imageUrl}` :
                 placeholder;
 
         return (
             <div className={episodeContainer}>
-                <Link to={`/episode/${this.props.id}`}>
+                <Link to={`/episode/${this.props.episode._id}`}>
                     <img className={thumbnail} alt="" src={image} />
                 </Link>
                 <div className={content}>
-                    <p className={title}>{this.props.title}</p>
-                    <p className={description}>{this.props.description}</p>
+                    <p className={title}>{`S${this.props.episode.season}E${this.props.episode.episodeNumber} ${this.props.episode.title}`}</p>
+                    <p className={description}>{this.props.episode.description}</p>
                     <p className={votes}>👎 82 👍 128</p>
                 </div>
             </div>

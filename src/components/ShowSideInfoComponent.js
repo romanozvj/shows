@@ -64,12 +64,12 @@ export class ShowSideInfoComponent extends Component {
                 placeholder;
         return (
             <div className={side}>
-                <div className={sideButton}>
+                <button onClick={this.props.onClickAddEpisode} className={sideButton}>
                     <img alt="" className={icon} src={plus}></img>
                     Add episode
-                </div>
+                </button>
 
-                <button onClick={this.props.onClick} className={sideButton}>
+                <button onClick={this.props.onClickFavourite} className={sideButton}>
                     <img alt="" className={icon} src={heart}></img>
                     Favorite
                 </button>
