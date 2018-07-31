@@ -110,7 +110,7 @@ export class EpisodeComponent extends Component {
                                 <div key={comment._id} className={commentWrapper}>
                                     <img className={userPlaceholderClass} src={userPlaceholder} />
                                     <div className={commentInfo}>
-                                        <p className={commenter}>{comment.userEmail}</p>
+                                        <p className={commenter}>{comment.userEmail.substring(0, comment.userEmail.indexOf('@'))}</p>
                                         <p className={arial20}>{comment.text}</p>
                                     </div>
                                     <RemoveCommentComponent
