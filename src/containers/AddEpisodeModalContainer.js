@@ -43,7 +43,8 @@ export class AddEpisodeModalContainer extends Component {
     }
 
     @action.bound
-    async _onClickSubmit() {
+    async _onFormSubmit(event) {
+        event.preventDefault();
         await uploadFile(this.componentState.data, this.props.state.currentUserToken)
             .then((res) => this.componentState.imageId = res._id)
             .catch((err) => console.log(err));
@@ -60,11 +61,7 @@ export class AddEpisodeModalContainer extends Component {
         getShowData(this.props.state, this.props.match.params.showId);
         this.props.state.currentEpisode.showIndex = -1;
         this.props.state.currentEpisode.episodeIndex = -1;
-    }
-
-    @action.bound
-    _onFormSubmit(event) {
-        event.preventDefault();
+        this.props.history.goBack();
     }
 
     @action.bound
@@ -78,7 +75,7 @@ export class AddEpisodeModalContainer extends Component {
 
     render() {
         const textInDropzone =
-            !this.componentState.imagePreview ? 
+            !this.componentState.imagePreview ?
                 'Drag your image here or browse' :
                 'Change photo';
         return (
@@ -91,7 +88,6 @@ export class AddEpisodeModalContainer extends Component {
                 description={this.componentState.description}
                 season={this.componentState.season}
                 episode={this.componentState.episode}
-                onClickSubmit={this._onClickSubmit}
                 textInDropzone={textInDropzone}
                 onFormSubmit={this._onFormSubmit}
             />

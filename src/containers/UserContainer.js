@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { observable, action, toJS, runInAction } from 'mobx';
+import { observable, action, runInAction } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { login, register } from '../services/user';
 import { UserComponent } from '../components/UserComponent';
@@ -26,10 +26,10 @@ export class UserContainer extends Component {
 
     @action.bound
     async _login() {
-        await login({
+        await login(JSON.stringify({
             email: this.componentState.email,
             password: this.componentState.password
-        })
+        }))
             .then((token) => {
                 runInAction(() => {
                     this.props.state.currentUser.name = this.componentState.email.substring(0, this.componentState.email.indexOf('@'));
@@ -38,7 +38,6 @@ export class UserContainer extends Component {
                         localStorage.setItem('rememberedLoginToken', token);
                     }
                     this.props.state.currentUser.loginToken = token;
-                    console.log(toJS(this.props.state));
                 })
             });
         this.props.history.push('/');
@@ -46,10 +45,10 @@ export class UserContainer extends Component {
 
     @action.bound
     _register() {
-        register({
+        register(JSON.stringify({
             email: this.componentState.email,
             password: this.componentState.password
-        });
+        }));
     }
 
     @action.bound

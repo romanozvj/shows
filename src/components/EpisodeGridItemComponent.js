@@ -21,7 +21,7 @@ const content = css`
 `;
 
 const description = css`
-    width: 600px;
+    width: 400px;
     display: block;
     white-space: nowrap;
     overflow: hidden;

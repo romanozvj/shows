@@ -1,4 +1,4 @@
-import { get, postAuthJson } from './api';
+import { get, post, deleteRequest } from './api';
 import { runInAction } from 'mobx';
 
 
@@ -33,9 +33,17 @@ export async function getEpisodeComments(state, episodeId) {
 }
 
 export function postComment(comment, loginToken) {
-  postAuthJson('comments', comment, loginToken);
+  return post('comments', JSON.stringify(comment), loginToken);
 }
 
 export function postEpisode(episode, loginToken) {
-  return postAuthJson('episodes', episode, loginToken);
+  return post('episodes', JSON.stringify(episode), loginToken);
+}
+
+export function likeOrDislike(showId, likeOrDislike, loginToken) {
+  return post(`shows/${showId}/${likeOrDislike}`, null, loginToken);
+}
+
+export function removeComment(comment, loginToken) {
+  return deleteRequest(`comments/${comment}`, loginToken);
 }

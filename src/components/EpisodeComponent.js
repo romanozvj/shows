@@ -7,6 +7,7 @@ import { arial20 } from '../styles/font';
 import userPlaceholder from '../images/userPlaceholder.png';
 import { EpisodeDescriptionComponent } from './EpisodeDescriptionComponent';
 import { CommentFormComponent } from './CommentFormComponent';
+import { RemoveCommentComponent } from './RemoveCommentComponent';
 
 const imageClass = css`
     display: block;
@@ -21,7 +22,7 @@ const arrow = css`
 
 const commentsContainer = css`
     margin-left: 300px;
-    width: 830px;
+    width: 50%;
 `;
 
 const category = css`
@@ -61,10 +62,13 @@ const commenter = css`
 `;
 
 const commentInfo = css`
+    display: inline-block;
     margin-left: 75px;
 `;
 
 const commentWrapper = css`
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
     padding: 20px;
     border-bottom: 2px solid rgb(248, 248, 248);
 `;
@@ -78,6 +82,7 @@ export class EpisodeComponent extends Component {
                 this.props.episode.imageUrl ?
                     `https://api.infinum.academy/${this.props.episode.imageUrl}` :
                     placeholder;
+
         return (
             this.props.episode === null ?
                 <p>Loading episode...</p> :
@@ -108,6 +113,15 @@ export class EpisodeComponent extends Component {
                                         <p className={commenter}>{comment.userEmail}</p>
                                         <p className={arial20}>{comment.text}</p>
                                     </div>
+                                    <RemoveCommentComponent
+                                        commenter={comment.userEmail.substring(0, comment.userEmail.indexOf('@'))}
+                                        currentUser={this.props.currentUser}
+                                        commentId={comment._id}
+                                        loginToken={this.props.loginToken}
+                                        loadComments={this.props.loadComments}
+                                        episodeId={this.props.episode._id}
+                                        state={this.props.state}
+                                    />
                                 </div>
                             )}
                         </div>

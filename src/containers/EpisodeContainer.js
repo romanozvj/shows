@@ -3,7 +3,6 @@ import { inject, observer } from 'mobx-react';
 import { getEpisodeComments, postComment } from '../services/show';
 import { EpisodeComponent } from '../components/EpisodeComponent';
 import { action, observable } from 'mobx';
-import { windowWhen } from '../../node_modules/rxjs/operator/windowWhen';
 
 
 @inject('state')
@@ -24,8 +23,8 @@ export class EpisodeContainer extends Component {
     }
 
     @action.bound
-    _handleCommentButtonClick() {
-        postComment({
+    async _handleCommentButtonClick() {
+        await postComment({
             text: this.componentState.commentInputValue,
             episodeId: this.props.match.params.episodeId
         }, this.props.state.currentUserToken);
@@ -50,7 +49,12 @@ export class EpisodeContainer extends Component {
                 handleCommentInput={this._handleCommentInput}
                 commentInputValue={this.componentState.commentInputValue}
                 commentInputPlaceholder="Post a comment..."
-                handleCommentButtonClick={this._handleCommentButtonClick} />
+                handleCommentButtonClick={this._handleCommentButtonClick}
+                currentUser={this.props.state.currentUser.name}
+                loginToken={this.props.state.currentUserToken}
+                loadComments={getEpisodeComments}
+                state={this.props.state}
+            />
         )
     }
 }

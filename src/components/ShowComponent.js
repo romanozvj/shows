@@ -13,8 +13,8 @@ const gridWrapper = css`
     grid-template-areas:
         "desc side"
         "eps side";
-    grid-template-columns: 870px 1fr;
-    grid-template-rows: 300px 1fr;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 2fr;
     grid-gap: 50px;
     grid-auto-rows: auto;
     padding-top: 30px;
@@ -32,11 +32,16 @@ export class ShowComponent extends Component {
             <div className={wrapper}>
                 <ArrowComponent to="/" />
                 <div className={gridWrapper}>
-                    <ShowDescriptionComponent show={this.props.show} />
+                    <ShowDescriptionComponent
+                        onClickLike={this.props.onClickLike}
+                        onClickDislike={this.props.onClickDislike}
+                        show={this.props.show}
+                    />
                     <ShowSideInfoComponent
                         onClickFavourite={this.props.onClickFavourite}
                         onClickAddEpisode={this.props.onClickAddEpisode}
-                        imageUrl={this.props.show.imageUrl} />
+                        imageUrl={this.props.show.imageUrl}
+                    />
                     <EpisodeListComponent show={this.props.show} />
                 </div>
             </div>

@@ -24,21 +24,6 @@ const hello = css`
     right: 130px;
 `;
 
-const logoutButton = css`
-    background-color: rgb(255, 117, 140);
-    border-radius: 7px;
-    border: none;
-    color: white;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    display: block;
-    font-size: 18px;
-    padding: 15px;
-    position: absolute;
-    top: 10px;
-    right: 500px;
-`;
-
 @observer
 export class HeaderComponent extends Component {
     render() {
@@ -50,7 +35,7 @@ export class HeaderComponent extends Component {
                     src={showLogo} />
 
                 <p className={hello}>{this.props.message}</p>
-                <button className={logoutButton} onClick={this.props.handleLogout}>Logout</button>
+                {this.props.button}
             </div>
         )
     }

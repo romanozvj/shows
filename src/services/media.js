@@ -1,5 +1,5 @@
-import { postAuth } from './api';
+import { post } from './api';
 
 export function uploadFile(data, loginToken) {
-    return postAuth('media', data, loginToken);
+    return post('media', data, loginToken);
 }

@@ -4,6 +4,7 @@ import { css } from 'emotion';
 import { getAllShows } from '../services/show';
 import { observer, inject } from 'mobx-react';
 import { runInAction } from '../../node_modules/mobx';
+
 const showGridWrapperFav = css`
   display: grid;
   margin: auto;
@@ -43,7 +44,9 @@ const category = css`
 export class ShowsContainer extends Component {
 
   componentWillMount() {
-    if (this.props.state.currentUser.name) return;
+    console.log(this.props.state.currentUser);
+    if (this.props.state.currentUser.loginToken === 'undefined') this.props.history.push('/login');
+    if (this.props.state.currentUser.loginToken) return;
     else {
       localStorage.rememberedLoginToken ?
         runInAction(() => {

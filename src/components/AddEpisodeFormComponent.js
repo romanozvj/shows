@@ -76,7 +76,7 @@ export class AddEpisodeFormComponent extends Component {
                     value={this.props.description}
                     onChange={this.props.onInputChange('description')}
                 />
-                <button onClick={this.props.onClickSubmit} className={submitButton}>ADD NEW EPISODE</button>
+                <button className={submitButton}>ADD NEW EPISODE</button>
             </form>
         )
     }

@@ -6,6 +6,8 @@ import { observer } from 'mobx-react';
 const eps = css`
     grid-area: eps;
     display: grid;
+    height: 500px;
+    overflow: auto;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
 `;
@@ -23,15 +25,17 @@ export class EpisodeListComponent extends Component {
     render() {
         return (
             'data' in this.props.show ?
-                <div className={eps}>
+                <div>
                     <p className={category}>SEASONS & EPISODES</p>
-                    {this.props.show.data[1].map((episode) =>
-                        <EpisodeGridItemComponent
-                            episode={episode}
-                            key={episode._id}
-                            imageUrl={episode.imageUrl}
-                        />
-                    )}
+                    <div className={eps}>
+                        {this.props.show.data[1].map((episode) =>
+                            <EpisodeGridItemComponent
+                                episode={episode}
+                                key={episode._id}
+                                imageUrl={episode.imageUrl}
+                            />
+                        )}
+                    </div>
                 </div> :
                 <p>Loading...</p>
         )

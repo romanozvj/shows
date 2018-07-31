@@ -4,39 +4,36 @@ export function get(model) {
         .then((res) => res.data);
 }
 
-export function post(model, data) {
-    return fetch(`https://api.infinum.academy/api/${model}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then((res) => res.json())
-        .then((res) => res.data);
+function isJson(value) {
+    try {
+        JSON.parse(value);
+    }
+    catch (e) {
+        return false;
+    }
+    return true;
 }
 
-export function postAuthJson(model, data, token) {
+export function post(model, data, token) {
+    const headers = {};
+    if (isJson(data)) headers['Content-Type'] = 'application/json';
+    if(token) headers['Authorization'] = token;
     return fetch(`https://api.infinum.academy/api/${model}`, {
         method: 'POST',
-        headers: {
-            'Authorization': token,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        headers: headers,
+        body: data,
     })
         .then((res) => res.json())
         .then((res) => res.data)
         .catch((res) => console.log(res));
 }
 
-export function postAuth(model, data, token) {
+export function deleteRequest(model, token) {
     return fetch(`https://api.infinum.academy/api/${model}`, {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
-            'Authorization': token,
-        },
-        body: data
+            'Authorization': token
+        }
     })
         .then((res) => res.json())
         .then((res) => res.data)

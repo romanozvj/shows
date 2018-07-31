@@ -96,7 +96,6 @@ export class AddEpisodeModalComponent extends Component {
                         title={this.props.title}
                         onInputChange={this.props.onInputChange}
                         description={this.props.description}
-                        onClickSubmit={this.props.onClickSubmit}
                         onFormSubmit={this.props.onFormSubmit}
                      />
                 </div>
