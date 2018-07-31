@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { getEpisodeComments, postComment } from '../services/show';
 import { EpisodeComponent } from '../components/EpisodeComponent';
-import { action, observable } from 'mobx';
+import { action, observable, runInAction } from 'mobx';
 
 
 @inject('state')
@@ -29,6 +29,7 @@ export class EpisodeContainer extends Component {
             episodeId: this.props.match.params.episodeId
         }, this.props.state.currentUserToken);
         getEpisodeComments(this.props.state, this.props.match.params.episodeId);
+        runInAction(() => this.componentState.commentInputValue = '');
     }
 
     render() {
