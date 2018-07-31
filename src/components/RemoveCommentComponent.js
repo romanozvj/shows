@@ -8,10 +8,12 @@ const buttonClass = css`
     border-radius: 7px;
     border: none;
     color: white;
+    max-height: 100px;
     text-align: center;
     font-family: Arial, sans-serif;
     display: inline-block;
-    margin-left: 300px;
+    float: right;
+    margin-left: 30px;
     font-size: 18px;
     padding: 15px;
 `;
