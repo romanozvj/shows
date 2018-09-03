@@ -27,15 +27,13 @@ export class RemoveCommentComponent extends Component {
     }
 
     render() {
-        const button =
-            this.props.commenter === this.props.currentUser ?
-                <button
-                    className={buttonClass}
-                    onClick={this._handleRemoveCommentButtonClick}
-                >
-                    Remove comment
-                </button> :
-                null
-        return button;
+        return this.props.commenter === this.props.currentUser ?
+        <button
+            className={buttonClass}
+            onClick={this._handleRemoveCommentButtonClick}
+        >
+            Remove comment
+        </button> :
+        null;
     }
 }
