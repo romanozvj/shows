@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const episodeContainer = css`
     padding: 20px;
+    width: 500px;
 `;
 
 const thumbnail = css`
@@ -21,7 +22,7 @@ const content = css`
 `;
 
 const description = css`
-    width: 400px;
+    width: 1000px;
     display: block;
     white-space: nowrap;
     overflow: hidden;

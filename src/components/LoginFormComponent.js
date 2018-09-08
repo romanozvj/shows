@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 const inputUsername = css`
     border: none;
     outline: none;
-    width: 200px;
+    width: 430px;
     border-bottom: 2px solid #ff758c;
     margin-top: 20px;
     margin-bottom: 5px;
@@ -18,7 +18,7 @@ const inputUsername = css`
 const inputPassword = css`
     border: none;
     outline: none;
-    width: 350px;
+    width: 430px;
     border-bottom: 2px solid #ff758c;
     letter-spacing: 10px;
     margin-top: 20px;
